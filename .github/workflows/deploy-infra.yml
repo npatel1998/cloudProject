@@ -17,9 +17,8 @@ jobs:
 
     # CDK uses these to resolve account/region automatically
     env:
-      CDK_DEFAULT_ACCOUNT: ${{ secrets.CDK_DEFAULT_ACCOUNT }}
-      CDK_DEFAULT_REGION: ${{ secrets.CDK_DEFAULT_REGION }}
-      AWS_REGION: ${{ secrets.CDK_DEFAULT_REGION }}
+      AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
+      REGION: ${{ vars.REGION }}
 
     steps:
       - name: Checkout code
@@ -34,12 +33,18 @@ jobs:
       - name: Build (infra + service)
         run: bash ./build.sh
 
+
+      - name: Show resolved env (token value will be masked)
+        run: |
+          echo "Region: $REGION"
+          echo "Account: $AWS_ACCOUNT"
+
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.CDK_DEFAULT_REGION }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-region: ${{ vars.REGION }}
 
       - name: CDK Bootstrap
         run: npx cdk bootstrap
