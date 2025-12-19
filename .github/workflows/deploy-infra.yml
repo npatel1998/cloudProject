@@ -15,9 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
 
+    # CDK uses these to resolve account/region automatically
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       CDK_DEFAULT_ACCOUNT: ${{ secrets.CDK_DEFAULT_ACCOUNT }}
       CDK_DEFAULT_REGION: ${{ secrets.CDK_DEFAULT_REGION }}
       AWS_REGION: ${{ secrets.CDK_DEFAULT_REGION }}
@@ -26,12 +25,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js (no cache, since lock files may be absent)
         uses: actions/setup-node@v4
         with:
           node-version: 22
-         
-      # ✅ Call build.sh from repo root (installs for infra + service)
+
+      # ✅ Call build.sh from repo root (installs infra + service)
       - name: Build (infra + service)
         run: bash ./build.sh
 
@@ -50,5 +49,5 @@ jobs:
         run: npx cdk deploy IamStack --require-approval never
         working-directory: infra
 
-      - name: "Deploy Lambda & Services"
-        run:  npx cdk deploy FunctionStack --require-approval never
+      - name:      - name: "Deploy Lambda & Services"
+        run: npx cdk deploy FunctionStack --require-approval never
