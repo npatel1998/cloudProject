@@ -49,5 +49,5 @@ jobs:
         run: npx cdk deploy IamStack --require-approval never
         working-directory: infra
 
-      - name:      - name: "Deploy Lambda & Services"
+      - name: "Deploy Lambda & Services"
         run: npx cdk deploy FunctionStack --require-approval never
