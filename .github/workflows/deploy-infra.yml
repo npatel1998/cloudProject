@@ -8,16 +8,18 @@ on:
   workflow_dispatch:
 
 permissions:
+  id-token: write       # required for OIDC
   contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: prod
+    environment: CDK_DEFAULT_ACCOUNT
 
     # CDK uses these to resolve account/region automatically
     env:
       AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
+      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
       REGION: ap-south-1
 
     steps:
@@ -43,6 +45,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
+          role-to-assume: arn:aws:iam::137345587738:role/GitHubCdkDeploy
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
           aws-region: ${{ env.REGION }}
 
