@@ -31,6 +31,12 @@ jobs:
         with:
           node-version: 22
           cache: npm
+           # 👇 Tell the action where your lock files are located
+          cache-dependency-path: |
+            infra/package-lock.json
+            service/package-lock.json
+            service/**/package-lock.json
+
 
       # ✅ Call build.sh from repo root (installs for infra + service)
       - name: Build (infra + service)

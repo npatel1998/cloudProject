@@ -6,9 +6,13 @@ set -e
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 
 # 1) Install in infra
+echo "[INFO] Installing dependencies in infra..."
 cd "$ROOT/infra"
 [ -f package-lock.json ] && npm ci || npm install
 
 # 2) After infra finishes, install in service
+
+echo "[INFO] Installing dependencies in service..."
+
 cd "$ROOT/service/lambda-functions"
 [ -f package-lock.json ] && npm ci || npm install
