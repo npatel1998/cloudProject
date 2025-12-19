@@ -1,0 +1,18 @@
+{
+  "name": "infra",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "bin/infra.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.232.2",
+    "constructs": "^10.4.4",
+    "path": "^0.12.7",
+    "typescript": "^5.9.3"
+  }
+}
