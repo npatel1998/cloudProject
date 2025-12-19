@@ -18,7 +18,7 @@ jobs:
     # CDK uses these to resolve account/region automatically
     env:
       AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
-      REGION: ${{ vars.REGION }}
+      REGION: ap-south-1
 
     steps:
       - name: Checkout code
@@ -44,7 +44,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-region: ${{ vars.REGION }}
+          aws-region: ${{ env.REGION }}
 
       - name: CDK Bootstrap
         run: npx cdk bootstrap
