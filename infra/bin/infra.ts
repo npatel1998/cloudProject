@@ -18,18 +18,18 @@ if (!account) {
 
 const env: cdk.Environment = { account, region };
 
-let iamStack = new IamStack(app, 'IamStack', { env });
-let functionStack = new FunctionStack(app, 'FunctionStack', { env });
-let dynamoStack =   new DynamoStack(app, 'DynamoStack', { env });
+// let iamStack = new IamStack(app, 'IamStack', { env });
+// let functionStack = new FunctionStack(app, 'FunctionStack', { env });
+// let dynamoStack =   new DynamoStack(app, 'DynamoStack', { env });
 
 // 1) Create IAM stack (defines the Lambda execution role)
 if(controller.stacks.includes("IamStack")){
- iamStack = new IamStack(app, 'IamStack', { env });
+ const iamStack = new IamStack(app, 'IamStack', { env });
 }
 
 // 2) Create Lambda stack, importing the role by ARN
 // if(controller.stacks.includes("FunctionStack")){
- functionStack = new FunctionStack(app, 'FunctionStack', {
+ const functionStack = new FunctionStack(app, 'FunctionStack', {
   env,  
 });
 // if (iamStack) functionStack.addDependency(iamStack);
@@ -37,7 +37,7 @@ if(controller.stacks.includes("IamStack")){
 
 // 3) Create DynamoDB stack
 // if(controller.stacks.includes("DynamoStack")){
-dynamoStack = new DynamoStack(app, 'DynamoStack', { env });
+const dynamoStack = new DynamoStack(app, 'DynamoStack', { env });
 // }
 
 // Optional but recommended: ensure IAM deploys before Lambda
