@@ -2,5 +2,6 @@
 node_modules/
 
 dist/
+cdk.out/
 # Dependency lock file
 package-lock.json
