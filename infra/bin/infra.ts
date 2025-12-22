@@ -3,11 +3,24 @@ import { IamStack } from '../lib/iam_stack';
 
 const app = new cdk.App();
 
-// CDK picks these from your GitHub environment secrets
-const env = {
-  account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION,
-};
+
+const account =
+  process.env.CDK_DEFAULT_ACCOUNT ??        // CDK default (preferred)
+  process.env.AWS_ACCOUNT;                  // GitHub secret you set
+
+const region =
+  process.env.CDK_DEFAULT_REGION ??         // CDK default (preferred)
+  process.env.AWS_DEFAULT_REGION ??         // set by many AWS tools/actions
+  process.env.AWS_REGION ??                 // set by configure-aws-credentials
+  'ap-south-1';                             // final fallback to your chosen Region
+
+if (!account) {
+  throw new Error(
+    'AWS account not found. Export CDK_DEFAULT_ACCOUNT (preferred) or AWS_ACCOUNT in the workflow before running CDK.'
+  );
+}
+
+const env: cdk.Environment = { account, region };
 
 // 1) Create IAM stack (defines the Lambda execution role)
 

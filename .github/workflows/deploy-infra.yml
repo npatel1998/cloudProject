@@ -42,12 +42,18 @@ jobs:
           echo "Account: $AWS_ACCOUNT"
 
 
-      - name: Configure AWS credentials
+      - name: Configure  AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::137345587738:role/GitHubCdkDeploy
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
           aws-region: ${{ env.REGION }}
+
+      - name: Export CDK defaults
+        run: |
+          ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+          echo "CDK_DEFAULT_ACCOUNT=$ACCOUNT" >> "$GITHUB_ENV"
+          echo "CDK_DEFAULT_REGION=${{ env.REGION }}" >> "$GITHUB_ENV"
 
       - name: CDK Bootstrap
         run: npx cdk bootstrap
