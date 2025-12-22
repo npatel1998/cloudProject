@@ -16,7 +16,7 @@
     "resolveJsonModule": true,
     "outDir": "cdk.out",
     
-    "types": [],
+    "types": ["node"],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],

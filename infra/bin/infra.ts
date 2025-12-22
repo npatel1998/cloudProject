@@ -37,7 +37,7 @@ if(controller.stacks.includes("IamStack")){
 
 // 3) Create DynamoDB stack
 // if(controller.stacks.includes("DynamoStack")){
-const dynamoStack = new DynamoStack(app, 'DynamoStack', { env });
+// const dynamoStack = new DynamoStack(app, 'DynamoStack', { env });
 // }
 
 // Optional but recommended: ensure IAM deploys before Lambda
