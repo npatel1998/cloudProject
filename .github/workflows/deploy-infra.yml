@@ -55,9 +55,9 @@ jobs:
           echo "CDK_DEFAULT_ACCOUNT=$ACCOUNT" >> "$GITHUB_ENV"
           echo "CDK_DEFAULT_REGION=${{ env.REGION }}" >> "$GITHUB_ENV"
 
-      # - name: CDK Bootstrap
-      #   run: npx cdk bootstrap
-      #   working-directory: infra
+      - name: CDK Bootstrap
+        run: npx cdk bootstrap
+        working-directory: infra
 
       - name: Deploy IAM Stack
         run: npx cdk deploy IamStack --require-approval never
