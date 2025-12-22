@@ -54,10 +54,11 @@ jobs:
           ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
           echo "CDK_DEFAULT_ACCOUNT=$ACCOUNT" >> "$GITHUB_ENV"
           echo "CDK_DEFAULT_REGION=${{ env.REGION }}" >> "$GITHUB_ENV"
-
-      - name: CDK Bootstrap
-        run: npx cdk bootstrap
-        working-directory: infra
+      
+      # Run bootstrap from repo root to avoid loading a broken app
+      - name: CDK Bootstrap (explicit target)
+        working-directory: .
+        run: npx cdk bootstrap aws://137345587738/ap-south-1
 
       - name: Deploy IAM Stack
         run: npx cdk deploy IamStack --require-approval never
