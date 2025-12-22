@@ -17,7 +17,9 @@ if (!account) {
 }
 
 const env: cdk.Environment = { account, region };
-
+let iamStack: IamStack | undefined;
+let functionStack: FunctionStack | undefined;
+let dynamoStack: DynamoStack | undefined;
 // 1) Create IAM stack (defines the Lambda execution role)
 if(controller.stacks.includes("IamStack")){
 const iamStack = new IamStack(app, 'IamStack', { env });
@@ -28,6 +30,7 @@ if(controller.stacks.includes("FunctionStack")){
 const functionStack = new FunctionStack(app, 'FunctionStack', {
   env,  
 });
+if (iamStack) functionStack.addDependency(iamStack);
 }
 
 // 3) Create DynamoDB stack
