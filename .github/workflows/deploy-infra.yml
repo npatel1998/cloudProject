@@ -60,9 +60,9 @@ jobs:
         working-directory: .
         run: npx cdk bootstrap aws://137345587738/ap-south-1
 
-      - name: Deploy IAM Stack
-        run: npx cdk deploy IamStack --require-approval never
-        working-directory: infra
+      # - name: Deploy IAM Stack
+      #   run: npx cdk deploy IamStack --require-approval never
+      #   working-directory: infra
         
       # ✅ Deploy both Lambda and Dynamo stacks (single step or separate steps)
       - name: Deploy Lambda & Dynamo
