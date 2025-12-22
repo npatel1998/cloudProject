@@ -55,9 +55,15 @@ jobs:
           echo "CDK_DEFAULT_ACCOUNT=$ACCOUNT" >> "$GITHUB_ENV"
           echo "CDK_DEFAULT_REGION=${{ env.REGION }}" >> "$GITHUB_ENV"
 
-      - name: CDK Bootstrap
-        run: npx cdk bootstrap
+
+      - name: CDK Bootstrap (only if needed)
         working-directory: infra
+        run: |
+          if aws cloudformation describe-stacks --stack-name CDKToolkit >/dev/null 2>&1; then
+            echo "CDK already bootstrapped in ${REGION} for this account."
+          else
+            echo "Bootstrapping CDK in ${REGION}..."
+            npx c      npx cdk bootstrap aws://137345587738/ap-south-1
 
       - name: Deploy IAM Stack
         run: npx cdk deploy IamStack --require-approval never
@@ -65,9 +71,5 @@ jobs:
         
       # ✅ Deploy both Lambda and Dynamo stacks (single step or separate steps)
       - name: Deploy Lambda & Dynamo
-        working-directory: infra
         run: npx cdk deploy FunctionStack DynamoStack --require-approval never
-
-      - name: "Deploy Lambda & Services"
-        run: npx cdk deploy FunctionStack --require-approval never
-        working-directory: service\lambda-functions
+        working-directory: infra
