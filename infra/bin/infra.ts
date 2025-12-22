@@ -4,15 +4,9 @@ import { IamStack } from '../lib/iam_stack';
 const app = new cdk.App();
 
 
-const account =
-  process.env.CDK_DEFAULT_ACCOUNT ??        // CDK default (preferred)
-  process.env.AWS_ACCOUNT;                  // GitHub secret you set
+const account ="137345587738";
 
-const region =
-  process.env.CDK_DEFAULT_REGION ??         // CDK default (preferred)
-  process.env.AWS_DEFAULT_REGION ??         // set by many AWS tools/actions
-  process.env.AWS_REGION ??                 // set by configure-aws-credentials
-  'ap-south-1';                             // final fallback to your chosen Region
+const region ='ap-south-1';
 
 if (!account) {
   throw new Error(
