@@ -9,6 +9,7 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "CommonJS",
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,

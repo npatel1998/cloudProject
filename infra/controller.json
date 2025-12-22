@@ -1,5 +1,5 @@
 {
     "stacks": [
-        "IamStack"
+        "functionStack","dynamoStack"
     ]
 }

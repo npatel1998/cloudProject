@@ -1,6 +1,8 @@
 import * as cdk from 'aws-cdk-lib';
 import { IamStack } from '../lib/iam_stack';
-
+import { FunctionStack } from '../lib/function_stack';
+import { DynamoStack } from '../lib/dynamo_stack';
+import * as controller from '../controller.json';
 const app = new cdk.App();
 
 
@@ -17,18 +19,20 @@ if (!account) {
 const env: cdk.Environment = { account, region };
 
 // 1) Create IAM stack (defines the Lambda execution role)
-
+if(controller.stacks.includes("IamStack")){
 const iamStack = new IamStack(app, 'IamStack', { env });
-
+}
 
 // 2) Create Lambda stack, importing the role by ARN
-// if(controller.stacks.includes("FunctionStack")){
-// const functionStack = new FunctionStack(app, 'FunctionStack', {
-//   env,
-//   // pass only the ARN (NOT the Role object)
-//   lambda  lambdaRoleArn: iamStack.lambdaRole.roleArn,
-// });
-// }
+if(controller.stacks.includes("FunctionStack")){
+const functionStack = new FunctionStack(app, 'FunctionStack', {
+  env,  
+});
+}
 
+// 3) Create DynamoDB stack
+if(controller.stacks.includes("DynamoStack")){
+const dynamoStack = new DynamoStack(app, 'DynamoStack', { env });
+}
 
 // Optional but recommended: ensure IAM deploys before Lambda
