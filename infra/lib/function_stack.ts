@@ -8,7 +8,7 @@ export class  FunctionStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
  
-  const assetDir = path.resolve(__dirname, '..', '..', 'service', 'lambda-functions', 'service');
+  const assetDir = path.resolve(__dirname, '..', '..', 'service', 'lambda-functions', 'dist');
 // Import the existing role and attach it to the Lambda
 const assignmentRole = iam.Role.fromRoleArn(
   this,
@@ -21,9 +21,9 @@ const assignmentRole = iam.Role.fromRoleArn(
 );
 
     const assignLambda = new lambda.Function(this, 'AssignFunction', {
-       functionName: 'MyLambdaFunction', // Lambda name
+       functionName: 'getReports', // Lambda name
       runtime: lambda.Runtime.NODEJS_22_X, // Runtime
-      handler: 'dist/index.handler', // Entry point in your code
+      handler: 'service/index.handler', // Entry point in your code
       code:lambda.Code.fromAsset(assetDir),      
       role: assignmentRole, // Attach IAM role
       memorySize: 512, // Memory in MB

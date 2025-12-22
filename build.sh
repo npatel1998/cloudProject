@@ -13,6 +13,10 @@ cd "$ROOT/infra"
 # 2) After infra finishes, install in service
 
 echo "[INFO] Installing dependencies in service..."
-
 cd "$ROOT/service/lambda-functions"
 [ -f package-lock.json ] && npm ci || npm install
+
+echo "== Install dev deps and build =="
+npm ci
+npx tsc
+

@@ -34,7 +34,12 @@ jobs:
       # ✅ Call build.sh from repo root (installs infra + service)
       - name: Build (infra + service)
         run: bash ./build.sh
-
+              
+      - name: Verify Lambda build output
+        working-directory: service/lambda-functions
+        run: |
+          ls -la dist || true
+          ls -la dist/service || true
 
       - name: Show resolved env (token value will be masked)
         run: |
