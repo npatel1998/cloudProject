@@ -24,7 +24,7 @@ const assignmentRole = iam.Role.fromRoleArn(
       runtime: lambda.Runtime.NODEJS_18_X, // Runtime
       handler: 'index.handler', // Entry point in your code
       code: lambda.Code.fromAsset(
-       '../../service/lambda-functions/service'
+       '../service/lambda-functions/service'
       ),
       role: assignmentRole, // Attach IAM role
       memorySize: 512, // Memory in MB
