@@ -4,8 +4,10 @@ import { FunctionStack } from '../lib/function_stack';
 import { DynamoStack } from '../lib/dynamo_stack';
 import { S3Stack } from '../lib/s3_stack';  
 import { GraphqlStack } from '../lib/appSync_stack';
-
+import * as controller from '../controller.json';
 const app = new cdk.App();
+
+console.log('controller:', controller);
 
 const account ="137345587738";
 const region ='ap-south-1';
