@@ -1,6 +1,6 @@
 type Item {
   id: ID!
-  name: String!
+  name: String
   description: String
 }
 
@@ -10,5 +10,5 @@ type Query {
 }
 
 type Mutation {
-  addItem(id: ID!, name: String!, description: String): Item
+  addItem(id: ID!, name: String, description: String): Item
 }
