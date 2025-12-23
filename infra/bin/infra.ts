@@ -2,6 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { IamStack } from '../lib/iam_stack';
 import { FunctionStack } from '../lib/function_stack';
 import { DynamoStack } from '../lib/dynamo_stack';
+import { S3Stack } from '../lib/s3_stack';  
 import * as controller from '../controller.json';
 const app = new cdk.App();
 
@@ -40,4 +41,5 @@ if(controller.stacks.includes("IamStack")){
 // const dynamoStack = new DynamoStack(app, 'DynamoStack', { env });
 // }
 
+const s3Stack = new S3Stack(app, 'S3Stack', { env });
 // Optional but recommended: ensure IAM deploys before Lambda
