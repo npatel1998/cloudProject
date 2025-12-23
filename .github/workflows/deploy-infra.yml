@@ -70,6 +70,6 @@ jobs:
       #   working-directory: infra
         
       # ✅ Deploy both Lambda and Dynamo stacks (single step or separate steps)
-      - name: Deploy Lambda & Dynamo
-        run: npx cdk deploy FunctionStack DynamoStack --require-approval never
+      - name: Deploy CDK
+        run: npx cdk deploy FunctionStack DynamoStack AppSyncStack --require-approval never
         working-directory: infra
