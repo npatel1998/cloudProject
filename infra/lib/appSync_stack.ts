@@ -1,6 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import * as appsync from 'aws-cdk-lib/aws-appsync';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
+import path from 'path';
 
 export class GraphqlStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -9,7 +10,7 @@ export class GraphqlStack extends cdk.Stack {
     // AppSync API
     const api = new appsync.GraphqlApi(this, 'MyApi', {
       name: 'MyGraphqlApi',
-      schema: appsync.SchemaFile.fromAsset('infra/graphql/schema.graphql'),
+      schema: appsync.SchemaFile.fromAsset(path.join(__dirname, '../graphql/schema.graphql')),
       authorizationConfig: {
         defaultAuthorization: {
           authorizationType: appsync.AuthorizationType.API_KEY,
