@@ -10,8 +10,7 @@ export class DynamoStack extends Stack {
 
     this.table = new dynamodb.Table(this, 'MyAppTable', {
       tableName: 'MyAppTable',
-      partitionKey: { name: 'pk', type: dynamodb.AttributeType.STRING },
-      sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },
+      partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: RemovalPolicy.RETAIN,           // keep in prod
     });

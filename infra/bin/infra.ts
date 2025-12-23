@@ -29,8 +29,6 @@ if(controller.stacks.includes("IamStack")){
  const iamStack = new IamStack(app, 'IamStack', { env });
 }
 
-
-const appSyncStack = new GraphqlStack(app, 'AppSyncStack', { env });
 // 2) Create Lambda stack, importing the role by ARN
 // if(controller.stacks.includes("FunctionStack")){
  const functionStack = new FunctionStack(app, 'FunctionStack', {
@@ -41,8 +39,11 @@ const appSyncStack = new GraphqlStack(app, 'AppSyncStack', { env });
 
 // 3) Create DynamoDB stack
 // if(controller.stacks.includes("DynamoStack")){
-// const dynamoStack = new DynamoStack(app, 'DynamoStack', { env });
+const dynamoStack = new DynamoStack(app, 'DynamoStack', { env });
 // }
+
+
+// const appSyncStack = new GraphqlStack(app, 'AppSyncStack', { env });
 
 const s3Stack = new S3Stack(app, 'S3Stack', { env });
 // Optional but recommended: ensure IAM deploys before Lambda

@@ -1,15 +1,14 @@
 type Item {
-  pk: ID!
-  sk: ID!
+  id: ID!
   name: String!
   description: String
 }
 
 type Query {
-  getItem(pk: ID!, sk: ID!): Item
+  getItem(id: ID!): Item
   listItems: [Item]
 }
 
 type Mutation {
-  addItem(pk: ID!, sk: ID!, name: String!, description: String): Item
+  addItem(id: ID!, name: String!, description: String): Item
 }
