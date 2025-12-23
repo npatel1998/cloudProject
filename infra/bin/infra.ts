@@ -3,6 +3,7 @@ import { IamStack } from '../lib/iam_stack';
 import { FunctionStack } from '../lib/function_stack';
 import { DynamoStack } from '../lib/dynamo_stack';
 import { S3Stack } from '../lib/s3_stack';  
+import { GraphqlStack } from '../lib/appSync_stack';
 import * as controller from '../controller.json';
 const app = new cdk.App();
 
@@ -28,6 +29,8 @@ if(controller.stacks.includes("IamStack")){
  const iamStack = new IamStack(app, 'IamStack', { env });
 }
 
+
+const appSyncStack = new GraphqlStack(app, 'AppSyncStack', { env });
 // 2) Create Lambda stack, importing the role by ARN
 // if(controller.stacks.includes("FunctionStack")){
  const functionStack = new FunctionStack(app, 'FunctionStack', {
