@@ -31,8 +31,8 @@ export class GraphqlStack extends cdk.Stack {
     dataSource.createResolver('GetItemResolver', {
       typeName: 'Query',
       fieldName: 'getItem',
-      requestMappingTemplate: appsync.MappingTemplate.dynamoDbGetItem('id', 'id'),
-      responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem(),
+      requestMappingTemplate: appsync.MappingTemplate.dynamoDbGetItem('pk', 'pk'),
+      responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem()
     });
 
     dataSource.createResolver('ListItemsResolver', {
@@ -46,7 +46,7 @@ export class GraphqlStack extends cdk.Stack {
       typeName: 'Mutation',
       fieldName: 'addItem',
       requestMappingTemplate: appsync.MappingTemplate.dynamoDbPutItem(
-        appsync.PrimaryKey.partition('id').is('id'),
+        appsync.PrimaryKey.partition('pk').is('pk').sort('sk').is('sk'),
         appsync.Values.projecting('ctx.args')
       ),
       responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem(),
