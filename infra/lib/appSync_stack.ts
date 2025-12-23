@@ -46,7 +46,7 @@ export class GraphqlStack extends cdk.Stack {
       typeName: 'Mutation',
       fieldName: 'addItem',
       requestMappingTemplate: appsync.MappingTemplate.dynamoDbPutItem(
-        appsync.PrimaryKey.partition('pk').is('pk').sort('sk').is('sk'),
+        appsync.PrimaryKey.partition('pk').is('id').sort('sk').is('ctx.args.sk'),
         appsync.Values.projecting('ctx.args')
       ),
       responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem(),
