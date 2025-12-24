@@ -54,7 +54,6 @@ dataSource.createResolver('AddItemResolver', {
   ),
   responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem(),
 });
-
     // Outputs
     new cdk.CfnOutput(this, 'GraphQLAPIURL', { value: api.graphqlUrl });
     new cdk.CfnOutput(this, 'GraphQLAPIKey', { value: api.apiKey! });
