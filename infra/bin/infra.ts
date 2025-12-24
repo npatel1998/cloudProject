@@ -26,14 +26,14 @@ const env: cdk.Environment = { account, region };
 
 // 1) Create IAM stack (defines the Lambda execution role)
 // if(controller.stacks.includes("IamStack")){
- const iamStack = new IamStack(app, 'IamStack', { env });
+//  const iamStack = new IamStack(app, 'IamStack', { env });
 // }
 
 // 2) Create Lambda stack, importing the role by ARN
 // if(controller.stacks.includes("FunctionStack")){
-//  const functionStack = new FunctionStack(app, 'FunctionStack', {
-//   env,  
-// });
+ const functionStack = new FunctionStack(app, 'FunctionStack', {
+  env,  
+});
 // // if (iamStack) functionStack.addDependency(iamStack);
 // // }
 
