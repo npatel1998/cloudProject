@@ -35,7 +35,7 @@ class IamStack extends Stack {
           'dynamodb:Scan',
         ],
         resources: [
-          `arn:aws:dynamodb:${this.region}:${this.account}:table/myappTable`
+          `arn:aws:dynamodb:${this.region}:${this.account}:table/MyAppTable`
         ],
       })
     );
