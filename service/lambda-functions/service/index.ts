@@ -2,7 +2,7 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand, GetCommand, UpdateCommand, DeleteCommand } from "@aws-sdk/lib-dynamodb";
 
-const client = new DynamoDBClient({});
+const client = new DynamoDBClient({region:'ap-south-1'});
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 
 // Define the shape of the input event
