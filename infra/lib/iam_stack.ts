@@ -3,7 +3,7 @@ import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as iam from 'aws-cdk-lib/aws-iam';
 
-export class IamStack extends Stack {
+class IamStack extends Stack {
   public readonly lambdaRole: iam.Role;
 
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -35,7 +35,7 @@ export class IamStack extends Stack {
           'dynamodb:Scan',
         ],
         resources: [
-          `arn:aws:dynamodb:${this.region}:${this.account}:table/MyAppTable`,
+          `arn:aws:dynamodb:${this.region}:${this.account}:table/myappTable`
         ],
       })
     );
@@ -59,3 +59,4 @@ export class IamStack extends Stack {
     );
   }
 }
+export { IamStack };
