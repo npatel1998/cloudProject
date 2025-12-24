@@ -5,6 +5,8 @@ import { DynamoDBDocumentClient, PutCommand, GetCommand, UpdateCommand, DeleteCo
 const client = new DynamoDBClient({region:'ap-south-1'});
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 
+console.log("dynmoClient",ddbDocClient)
+
 // Define the shape of the input event
 type OrderEvent = {
     order_id: string;
@@ -31,7 +33,7 @@ export const assignLambda = async (event: OrderEvent): Promise<string> => {
 export const createDataLambda = async (event: OrderEvent): Promise<string> => {
     try {
         const params = {
-            TableName: "myappTable",
+            TableName: "MyAppTable",
             Item: {
                 id: event.order_id,
                 amount: event.amount,
