@@ -99,5 +99,36 @@ const assignmentRole = iam.Role.fromRoleArn(
         API_KEY: 'replace-with-your-key',
       },
     });
+
+
+    const StoreDataToS3Lambda = new lambda.Function(this, 'StoreDataToS3Function', {
+      functionName: 'storeDataToS3Lambda', // Lambda name
+      runtime: lambda.Runtime.NODEJS_22_X, // Runtime
+      handler: 'service/index.storeDataToS3Lambda', // Entry point in your code
+      code:lambda.Code.fromAsset(assetDir),      
+      role: assignmentRole, // Attach IAM role
+      memorySize: 512, // Memory in MB
+      timeout: Duration.seconds(30), // Timeout
+      environment: {
+        NODE_ENV: 'production',
+        DB_TABLE: 'MyAppTable',
+        API_KEY: 'replace-with-your-key',
+      },
+    });
+
+    const GetDataToS3Lambda = new lambda.Function(this, 'GetDataToS3Function', {
+      functionName: 'getDataToS3Lambda', // Lambda name
+      runtime: lambda.Runtime.NODEJS_22_X, // Runtime
+      handler: 'service/index.getDataToS3Lambda', // Entry point in your code
+      code:lambda.Code.fromAsset(assetDir),      
+      role: assignmentRole, // Attach IAM role
+      memorySize: 512, // Memory in MB
+      timeout: Duration.seconds(30), // Timeout
+      environment: {
+        NODE_ENV: 'production',
+        DB_TABLE: 'MyAppTable',
+        API_KEY: 'replace-with-your-key',
+      },
+    });
   }
 }

@@ -54,7 +54,7 @@ class IamStack extends Stack {
     this.lambdaRole.addToPolicy(
       new iam.PolicyStatement({
         actions: ['s3:GetObject', 's3:PutObject'],
-        resources: ['arn:aws:s3:::my-app-bucket/*'],
+        resources: ['arn:aws:s3:::cdk-hnb659fds-assets-137345587738-ap-south-1/*'],
       })
     );
   }
